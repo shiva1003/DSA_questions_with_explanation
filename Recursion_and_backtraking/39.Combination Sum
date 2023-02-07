@@ -1,0 +1,24 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        def solve(candidates, subset, powerset, i, summ):
+            if target == summ:# condition which is needed in result
+                powerset.append(subset.copy())#copy it in powerset
+                return
+            if summ > target:# when sum is greater no need to add that path
+                return
+            if i == len(candidates): # when the range exceeds return that path
+                return
+            # include case:
+            subset.append(candidates[i]) 
+            # append those cases when you are adding sum to make = target
+            solve(candidates, subset, powerset, i, summ + candidates[i])
+            # pop each element for backtracking
+            subset.pop()
+            # exclude case: that's y skiping to i+1
+            solve(candidates, subset, powerset, i+1 , summ)
+        subset = []
+        powerset = []
+        # main function call
+        solve(candidates, subset, powerset, 0, 0)
+        # returning final answer in powerset
+        return powerset
