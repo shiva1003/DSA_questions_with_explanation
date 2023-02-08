@@ -1,0 +1,28 @@
+class Solution:
+    def combinationSum2(self, candidates: List[int], target: int) -> List[List[int]]:
+        subset = []
+        powerset = []
+        candidates.sort()
+        def solve(candidates, subset, powerset, i, summ):
+            if summ == target:
+                powerset.append(subset.copy())
+                return
+            if i == len(candidates):
+                return
+            if summ > target:
+                return 
+            #include
+            if candidates[i] <= target:
+                subset.append(candidates[i])
+                #after appending we are increasing the index by 1 ie i+1
+                solve(candidates, subset, powerset, i+1, candidates[i]+summ)
+                subset.pop()#backtrack
+           
+            # to remove duplicates
+            while i < len(candidates)-1 and candidates[i] == candidates[i+1]:
+                i += 1 
+            #exclude
+            solve(candidates, subset, powerset, i+1, summ)
+        solve(candidates, subset, powerset, 0, 0)
+        return powerset
+
