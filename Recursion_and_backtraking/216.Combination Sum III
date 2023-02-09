@@ -1,0 +1,23 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        powerset, subset = [], []
+        nums = list(range(1, 10))
+        def solve(subset, powerset, i, sm, target): 
+            
+            if i>=len(nums):
+                if sm == target and len(subset) == k:
+                    powerset.append(subset.copy())
+                return
+            if sm>target or len(subset)>k:
+                return 
+            if sm == target and len(subset) == k:
+                powerset.append(subset.copy())
+                return
+                 
+            subset.append(nums[i]) #include
+            solve(subset, powerset, i+1, sm+nums[i], target)
+            subset.pop()
+                
+            solve(subset, powerset, i+1, sm, target) #exclude
+        solve(subset, powerset, 0, 0, n)
+        return powerset
