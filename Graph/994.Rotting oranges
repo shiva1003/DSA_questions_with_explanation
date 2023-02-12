@@ -1,0 +1,58 @@
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        row_len=len(grid) #row
+        col_len=len(grid[0])#col
+        # que is a list  to store position of rotten oranges
+        que=[]
+        #find rotten oranges in grid 
+        #and appned their position in the que
+        for i in range(row_len):
+            for j in range(col_len):
+                if grid[i][j]==2:#if rotten
+                    que.append((i,j))
+        # we need to return min time in which 
+        # each orange of the grid become rotten
+        que.append(None)
+        time=0
+        # till size of que grater than 1
+        while len(que)>1:
+            #pop the first element
+            popped_ele = que.pop(0)
+            #if popped element is none
+            #then just increase the time by 1
+            #base condn
+            if popped_ele== None:
+                time+=1
+                que.append(None)
+                continue
+            #in popped ele--> (i,j) 
+            #first index would be i and sec one would be j
+            i=popped_ele[0]
+            j=popped_ele[1]
+            # rotten orange can make the fresh orange rotten in four direction
+            # left,right,above and below position oranges to rotten orange will become rotten 
+            #check if any of the four direction of rotten orange  i.e.,2 having any fresh orange i.e.,1
+            #then make that orange rotten and append 2 in that position
+            
+            # for right direction
+            if (0 <= i+1 < row_len) and (grid[i+1][j]==1):
+                que.append((i+1,j))
+                grid[i+1][j]=2
+            #for left direction
+            if (0 <= i-1 < row_len) and (grid[i-1][j]==1):
+                que.append((i-1,j))
+                grid[i-1][j]=2
+            #for below
+            if (0 <= j+1 < col_len) and (grid[i][j+1]==1):
+                que.append((i,j+1))
+                grid[i][j+1]=2
+            #for above
+            if (0 <= j-1 < col_len) and (grid[i][j-1]==1):
+                que.append((i,j-1))
+                grid[i][j-1]=2
+        #if all oranges are fresh in the grid then just return -1
+        for i in range(row_len):
+            for j in range(col_len):
+                if grid[i][j]==1:
+                    return -1 
+        return time
