@@ -1,0 +1,42 @@
+class Solution:
+    def canCross(self, stones: List[int]) -> bool:
+        #destination is a variable which stores the 
+        #position of last stone where frog need to reach
+        destination=stones[len(stones)-1]
+        #it may happen that elements can be repeated so to avoid that
+        #associate a set for every stone in stones array
+        #make a hash map of stones along with set()
+        #for eg.1 : 
+        #stones = [0,1,3,5,6,8,12,17]
+        #hash_map={0: set(), 1: set(), 3: set(), 5: set(), 6: set(), 8: set(), 12: set(), 17: set()}
+        hash_map=dict()
+        #in hash map , key will be stone and value will be set()
+        for stone in stones:
+            hash_map[stone]=set()
+        #it is given that the initial jump of frog is 1
+        hash_map[stones[0]].add(1)
+        #jumps is a set of particular position of stones 
+        #for every position of stone in stones
+        #find out the new position while iterating over set of jumps
+        for position in stones:
+            jumps=hash_map[position]
+            for j in jumps:
+                #calculate newposition by adding position with j 
+                new_pos=position+j
+                #check whether the new_pos is our target destination or not
+                if new_pos==destination:
+                    return True
+                #check whether the new position is available in  hash map
+                #if yes ,perform the below operation
+                if new_pos in hash_map:
+                    #if j-1 > 0 then add j-1 to the new position in hashmap
+                    if (j-1)>0:
+                        hash_map[new_pos].add(j-1)
+                    #add j to the new position in hashmap
+                    hash_map[new_pos].add(j)
+                    #add j+1 to the new position in hashmap
+                    hash_map[new_pos].add(j+1)
+        #else return false
+        return False
+
+             
