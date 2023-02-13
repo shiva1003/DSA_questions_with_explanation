@@ -1,0 +1,33 @@
+class Solution:
+    def shortestPathBinaryMatrix(self, grid: List[List[int]]) -> int:
+        row = len(grid)
+        col = len(grid[0])
+        # when it starts or ends with 1 so just return -1 
+        if grid[0][0] == 1 or grid[row-1][col-1] == 1:
+            return -1
+        # direction array for all eight directions 
+        directions = [[-1,-1], [0,-1], [-1,0], [1,1], [1,-1], [-1,1], [0,1], [1,0]]
+        q = deque()
+        # append the values for rw, cl and distance
+        q.append((0,0,1))
+        while q :
+            r, c, d = q.popleft()
+            # when u reach at the end r == c and r is at last diagonal position then
+            # return direction
+            if r == c and r== row-1:
+                return d            
+            for direction in directions:
+                # make new_r, new_c to add the values of directions and check for 8 cases
+                new_r, new_c = r + direction[0] , c + direction[1] 
+                # if the new value of grid is 0 then append the position of new_r, new_c 
+                # and increase the distance by 1
+                if 0 <= new_r <= row-1 and 0 <= new_c <= col-1 and grid[new_r][new_c] == 0:
+                    q.append((new_r, new_c, d+1))
+                    # mark those position 1 which you have already visited.
+                    grid[new_r][new_c] = 1
+        return -1
+
+
+
+
+      
