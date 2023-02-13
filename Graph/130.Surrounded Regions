@@ -1,0 +1,35 @@
+class Solution:
+    def solve(self, board: List[List[str]]) -> None:
+        row = len(board)
+        col = len(board[0])
+        q = deque()
+            # we are visiting those o's which are attached with boundries.
+        visited = [[False for _ in range(col)] for _ in range(row)]
+            #check for the outer most grid of both row and col and mark True
+        for i in range(row):
+            for j in range(col):
+                if i==0 or i == row-1 or j==0 or j == col-1:
+                    if board[i][j] == 'O':
+                        q.append((i, j))
+                        visited[i][j] = True
+            # make an adjancy list to check in all four directions
+        directions = [[1, 0], [0, 1], [-1, 0], [0, -1]]
+        while q:
+                #now pop those element which are in q
+            new_r, new_c = q.popleft()
+            for direc in directions:
+                # now check in all directions for the q u have popped
+                r = new_r + direc[0]
+                c = new_c + direc[1]
+                # after checking in 4 directions, check whether O is there
+                # or not and it is already in visited or not.
+                if r>0 and r<row and c>0 and c<col and board[r][c] == 'O' and not visited[r][c]:
+                    visited[r][c] = True
+                    q.append((r, c)) # append those new place which u
+                    # have got with the above condition
+        for i in range(row):
+            for j in range(col):# check for the other places where is X
+                if not visited[i][j]:
+                    board[i][j] = 'X'
+        return board
+       
