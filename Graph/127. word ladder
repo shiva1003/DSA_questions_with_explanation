@@ -1,0 +1,23 @@
+class Solution:
+    def ladderLength(self, beginWord: str, endWord: str, wordList: List[str]) -> int:
+        set_wordlist = set(wordList)
+        # make set of wordList so that it'll not include the repeated one
+        letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
+        'r','s','t','u','v','w','x','y','z']
+        q = deque([])
+        # append the "hit" ie beginword in Q with a count variable initialized with 0
+        q.append([beginWord, 0])
+        while q:
+            # unpacking
+            a, count = q.popleft()
+            if a==endWord: # if u get d result at d very first case, return count+1
+                return count + 1
+            for j in range(len(a)): 
+                for i in letters: # to replace i with each alphabetical letter
+                #if that word is present in set(wordlist and it is not d beginword ie."hit" 
+                    if (a[:j]+i+a[j+1:]) in set_wordlist and (a[:j]+i+a[j+1:])!=beginWord:
+                        # then simply remove it and append it in q and increase count by 1
+                        set_wordlist.remove(a[:j]+i+a[j+1:])
+                        q.append([a[:j]+i+a[j+1:], count + 1])
+        return 0
+       
