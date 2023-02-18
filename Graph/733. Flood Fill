@@ -1,0 +1,17 @@
+class Solution:   
+    def dfs(self, x, y, oldcolor, newcolor, image):
+        directions = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+        if x < 0 or x == len(image) or y < 0 or y == len(image[0]) or image[x][y] != oldcolor:
+            return 
+        image[x][y] = newcolor
+        for direction in directions:
+            new_x = x + direction[0]
+            new_y = y + direction[1]
+            self.dfs(new_x, new_y, oldcolor, newcolor, image)
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newcolor: int) -> List[List[int]]:
+        oldcolor = image[sr][sc]
+        if(image[sr][sc] != newcolor):
+            self.dfs(sr, sc, oldcolor, newcolor, image)
+        return image
+
+        
