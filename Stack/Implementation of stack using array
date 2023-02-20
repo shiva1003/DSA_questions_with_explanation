@@ -1,0 +1,46 @@
+class Stack:
+    def __init__(self, max_size):
+        self.top = -1
+        self.max_size = max_size
+        self.stack = []
+        
+    def is_empty(self): # it will be empty when the top will have -1
+        if(self.top < 0):
+            return True
+        return False
+    
+    def is_full(self):
+        if(self.top >= self.max_size - 1): # max_size will b total length
+            return True
+        return False
+    
+    def push(self, key):
+        if (self.is_full()): #Base condition, if there is no space
+            print("stack overflow")
+            return None
+        self.top += 1
+        self.stack.append(key)
+        print("element is pushed and top points to =>", self.stack[self.top])
+            
+    def pop(self, key):
+        if (self.is_empty()): 
+            print("underflow")
+            return -1
+        deleted_ele = self.stack[self.top]
+        self.top -= 1
+        return deleted_ele
+        
+    def peek(self):
+         if (self.is_empty()): 
+            print("underflow")
+            return -1
+         peek_ele = self.stack[self.top]
+         return peek_ele
+    
+if __name__ == '__main__':   
+    stack = Stack(100)#size
+    stack.push(10) 
+    stack.push(20) 
+    stack.push(30) 
+    print("Deleted element is:", stack.pop(30))#fifo
+    print("Top is: ", stack.peek())          
