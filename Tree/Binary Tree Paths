@@ -1,0 +1,27 @@
+class Solution:
+    def dfs(self, node, path, res):
+        # case when any node exists but it's left and right
+        # child doesnot exist, means it is leaf node  
+        if node.left is None and node.right is None:
+            res.append(path)
+        # if left node exists then append it in path by making string
+        if node.left:
+            path_left = ""
+            path_left = path + "->" + str(node.left.val) 
+            self.dfs(node.left, path_left, res)
+        # if right node exists then append it in path by making string
+        if node.right:
+            path_right = ""
+            path_right = path + "->" + str(node.right.val)
+            self.dfs(node.right, path_right, res)
+
+    def binaryTreePaths(self, root: Optional[TreeNode]) -> List[str]:
+        res = []
+        path = ''.join(str(root.val))
+        # only when root exists without any children
+        if root.left is None and root.right is None:
+            res.append(path)
+            return res
+        self.dfs(root, path, res)
+        return res
+
