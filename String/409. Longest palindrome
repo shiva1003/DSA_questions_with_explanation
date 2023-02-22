@@ -1,0 +1,23 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        # if len is 1 then simply return it
+        if len(s)==1: return len(s)
+        # initialize variable to maintain length
+        result_len, remainder = 0, 0
+        # make a list of set of s
+        l = list(set(s))
+        for i in l:
+            # if count is divisible by 2 
+            # then add its count in result_len
+            if (s.count(i))%2 == 0:
+                result_len += s.count(i)
+            # if multiple letters have count = 1
+            # then keep only 1 to be in mid and 
+            # subtract the count of rest
+            else:
+                result_len += s.count(i)-1
+                remainder = 1
+        # return remainder + result_len
+        return result_len + remainder
+            
+        
