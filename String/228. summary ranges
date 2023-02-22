@@ -1,0 +1,35 @@
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        if not nums: return []
+        #Create an empty list called "ranges" to store the ranges.
+        ranges = []
+        #Initialize pointers, start, end to the first no in array.
+        start, end = nums[0], nums[0]
+        #Iterate array from the second number to the last number.
+        for i in range(1, len(nums)):
+        #If the current no. is equal to the previous no. plus one, 
+        #update the "end" pointer to the current no.
+            if nums[i] == end + 1:
+                end = nums[i]
+            else:
+                if start == end:
+                    ranges.append(str(start))
+                else:
+                    ranges.append(str(start) + "->" + str(end))
+                start, end = nums[i], nums[i]
+        if start == end:
+            ranges.append(str(start))
+        else:
+            ranges.append(str(start) + "->" + str(end))
+        #After the loop, add the final range to the list of ranges.
+        return ranges
+
+
+             
+
+
+
+
+
+
+        
