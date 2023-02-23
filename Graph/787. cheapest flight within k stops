@@ -1,0 +1,33 @@
+class Solution:
+    def findCheapestPrice(self, n: int, flights: List[List[int]], src: int, destn: int, K: int) -> int:
+        if src == destn:
+            return 0
+        prices = collections.defaultdict(lambda: float('inf'))
+        #make dic location = {city : [othr_city, price], 0:[1,100]}
+        locations = collections.defaultdict(list)
+
+        for city, other_city, p in flights:
+            locations[city] += [(other_city, p)] 
+        q = [(src, -1, 0)]#k= -1 becz initially not at nypoint,0-cost
+
+        while q:
+            position, k, cost = q.pop(0)
+            if position == destn or k == K: 
+                continue
+            # now check for price of nbr with its location 
+            for nbr , p in locations[position]:
+                if cost + p >= prices[nbr]: 
+                    continue
+                else:
+                    prices[nbr] = cost + p
+                    q += [(nbr, k+1, cost+p)]
+        if prices[destn] < float('inf'):
+            return prices[destn]
+        else:
+            return -1
+                
+
+
+
+
+        
