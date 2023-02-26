@@ -1,0 +1,17 @@
+class Solution:
+    def mergeTwoLists(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        curr = dummy = ListNode() #make a dummy listnode
+        while l1 and l2:
+            if l1.val > l2.val : #when L1 is greater
+                curr.next = l2
+                l2 = l2.next
+            else:
+                curr.next = l1 #when l2 is greater
+                l1 = l1.next
+            curr = curr.next
+        if not l1:#if length of l2 is greater than l1
+            curr.next = l2
+        else:#if length of l1 is greater than l2
+            curr.next = l1
+        return dummy.next
+        
