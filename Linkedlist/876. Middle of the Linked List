@@ -1,0 +1,11 @@
+class Solution:
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        #tortoise method
+        onestep = twostep = head
+        while twostep and twostep.next:
+            onestep = onestep.next 
+            #the time when twostep will reach to end, onestep will be at
+              #half position means you'll be at mid , so return the onestep
+            twostep = twostep.next.next
+        return onestep 
+# since it is linkedlist so along with 3 , 4 & 5 will automatically get returned
