@@ -1,0 +1,15 @@
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        slow = fast = head # both will be pointing head initially
+        for i in range(n):
+            fast = fast.next #if n=3 then increase fast for 0,1,2,3 times
+
+        if fast is None: # n = len of linkedlist 
+            return head.next # means del first ele
+
+        while fast.next: #untill fast doesn't reaches to end 
+            slow = slow.next # increase slow by one step
+            fast = fast.next # increase fast by 1 step
+        slow.next = slow.next.next # when fast reaches to end. 
+        return head
+
