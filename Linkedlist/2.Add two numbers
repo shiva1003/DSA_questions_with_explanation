@@ -1,0 +1,21 @@
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        s = ListNode(0)#take a dummy node
+        ptr = s #initially ptr at head of s
+        carry = 0
+        while (l1 or l2 or c): 
+            if l1:# when l1 exists only
+                carry += l1.val
+                l1 = l1.next
+            if l2:# when l2 only exists
+                carry += l2.val
+                l2 = l2.next
+            ptr.next = ListNode(carry%10)
+            #now the ptr will point to remaindr fetchd
+            ptr = ptr.next
+            carry = carry//10 
+            #again d valu of carry will b updated by new Quotient valu
+        return s.next 
+        # return node from the 1st index of dummy node ie.after s:0-->...
+
+        
