@@ -1,0 +1,10 @@
+class Solution:
+    def deleteNode(self, node):
+        #assign place of next becz u have only given node not even head
+        next = node.next
+        # copy the val of next into node 
+        node.val = next.val
+        # create the link of node with next of next 
+        node.next = next.next
+
+        
