@@ -1,0 +1,9 @@
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        l1, l2 = headA, headB
+        while l2 != l1: #either if len(A) is more or len(B)
+            l1=l1.next if l1 else headB#take val of l1 if greatr
+            l2=l2.next if l2 else headA#take val of l2 if greatr
+        return l1 
+        #return l1 or l2 becz for futher condition both r same
+        
