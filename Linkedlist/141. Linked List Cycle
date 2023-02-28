@@ -1,0 +1,20 @@
+class Solution:
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        if (head is None or head.next is None):
+            return False #if empty node
+
+        slow, fast = head, head
+        #take 2 pointers slow and fast
+        
+        #Unless fast.next.next exists
+        while (fast.next and fast.next.next):
+            #increment slow pointer one step
+            slow = slow.next
+            #increment fast pointer two step
+            fast = fast.next.next
+            #if there is cycle,then surely there will b one 
+            #point when both fast and slow will b equal.
+            if fast == slow:
+                return True #if so then return T else F
+        return False
+        
