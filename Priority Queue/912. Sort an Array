@@ -1,0 +1,8 @@
+class Solution:
+    def sortArray(self, nums: List[int]) -> List[int]:
+        min_heap = [nums[x] for x in range(len(nums))]
+        heapq.heapify(min_heap)
+        ans = []
+        while min_heap:
+            ans.append(heapq.heappop(min_heap))
+        return ans
