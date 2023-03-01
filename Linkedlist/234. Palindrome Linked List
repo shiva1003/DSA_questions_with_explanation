@@ -1,0 +1,48 @@
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        # here we'll use slow and fast pointer and when the 
+        # fast reaches to end then slow will b at mid.
+        # then backtract the same steps for slow and compare them. 
+
+        #fetching the mid of the linked list
+        slow, fast = head, head
+        while fast.next and fast.next.next:
+            slow = slow.next
+            fast = fast.next.next
+
+        #reverse the elements
+        prev = None
+        while slow:
+            temp  = slow.next
+            slow.next = prev
+            prev = slow
+            slow = temp
+       
+
+        #comparision 
+        left , right = head, prev
+        while left and right:
+            if left.val != right.val:
+                return False
+            left = left.next
+            right = right.next
+        
+        return True
+
+        
+
+        
+      
+        """
+
+        Second method but I'm bit confused why we are using ,
+
+        l=[]
+        while head:
+            l += head.val,
+            head = head.next
+        return l == l[::-1]
+
+        """
+
+            
