@@ -1,0 +1,20 @@
+class Solution:
+    def findKthPositive(self, arr: List[int], k: int) -> int:
+        #applying concept of binary search
+        l = 0 #low
+        h = len(arr)-1 #high
+        while l <= h:
+            mid = (l+h)//2 #mid
+            missed = arr[mid] - (mid+1)
+            if missed < k: #when missed is less than k
+                l = mid+1 #increase the size of mid
+            else :
+                h = mid-1 #otherwise reduce the mid
+        return l + k
+
+        """l=[]
+        for i in range(0, (arr[-1] + k) + 1):
+            l.append(i)
+            sdif = set(l).symmetric_difference(set(arr))  one test case was not passing with this code
+            temp_list=list(sdif)
+        return (temp_list[k])"""
