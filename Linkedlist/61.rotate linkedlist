@@ -1,0 +1,25 @@
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if not head:
+            return head
+
+        #connecting head with end 
+        cur = head
+        length = 1
+        while cur.next:
+            cur = cur.next
+            length += 1
+        cur.next = head
+
+        #move to new head
+        k= length - (k%length)
+        while k>0: #no of times u need to rotate
+            cur=cur.next 
+            k-=1
+
+        #if k times rotation is completed
+        #disconnect and return new head
+        newhead = cur.next
+        cur.next = None
+        return newhead
+        
