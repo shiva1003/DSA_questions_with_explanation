@@ -1,0 +1,31 @@
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        if head == None or k == 1: # if the linked list is empty
+            return head
+        cur_count_node = head  # Count the length of the Linked List
+        count = 1
+        while cur_count_node.next:
+            count += 1
+            cur_count_node = cur_count_node.next
+
+        # Setting the dummy Node and previous, current and next Node
+        dummy_node = ListNode()
+        dummy_node.next = head
+        
+        cur_node = dummy_node
+        pre_node = dummy_node
+        next_node = dummy_node
+       
+        while count >= k:  #  Starting the Iteration
+            cur_node = pre_node.next
+            next_node = cur_node.next
+            
+            for i in range(1, k): #k-1 times if 3 nodes are takn thn 2 chngs required
+                cur_node.next = next_node.next
+                next_node.next = pre_node.next
+                pre_node.next = next_node
+                next_node = cur_node.next
+            pre_node = cur_node
+            count -= k  # Decreasing the Count by k 
+            
+        return dummy_node.next
