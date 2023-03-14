@@ -1,0 +1,15 @@
+class Solution:
+    def numComponents(self, head: ListNode, G: List[int]) -> int:
+        #initialize a count
+        count=0
+        curr = head
+        while curr:
+            # if it exists in G then
+            if curr.val in G:
+                count += 1
+                #then it will be connected
+                while curr and curr.val in G:
+                    curr = curr.next
+            else:
+                curr = curr.next
+        return count
