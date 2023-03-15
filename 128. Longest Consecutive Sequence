@@ -1,0 +1,25 @@
+class Solution:
+    def longestConsecutive(self, arr: List[int]) -> int:
+        n = len(arr)
+        res = 1
+        count = 0
+        arr.sort()
+        v = []
+        
+        if len(arr) == 0:
+            return 0
+        
+        for i in range(n):
+            if arr[i] != arr[i-1]:
+                v.append(arr[i])
+                
+        #finding the max length of consecutive arr
+        for i in range(len(v)):
+            if (i>0 and v[i] == v[i-1]+1):
+                count += 1
+            else:
+                count = 1
+                
+            #take out the max
+            res = max(res, count)
+        return res
