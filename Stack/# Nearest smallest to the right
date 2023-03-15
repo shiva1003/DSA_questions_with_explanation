@@ -1,0 +1,24 @@
+# Nearest smallest to the right
+
+class Solution:
+    def nearestSmallestElement(arr):
+        n = len(arr)
+        v = []
+        s = []
+        for i in range(n-1, -1, -1):
+            if len(s) == 0:
+                v.append(-1)
+            elif (len(s)>0 and s[-1] < arr[i]):
+                v.append(s[-1])
+            elif (len(s) >0 and s[-1] > arr[i]):
+                while (len(s)>0 and s[-1] > arr[i]):
+                    s.pop()
+                if (len(s) == 0):
+                    v.append(-1)
+                else:
+                    v.append(s[-1])
+            s.append(arr[i])
+        return v[::-1]
+if __name__ == "__main__":
+    arr = [4,5,2,10,8]
+    print(Solution.nearestSmallestElement(arr))
