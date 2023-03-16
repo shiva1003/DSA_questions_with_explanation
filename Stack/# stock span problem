@@ -1,0 +1,29 @@
+# stock span problem
+
+class Solution:
+    def nearestLargerElement(arr):
+        n = len(arr)
+        v = []
+        s = []
+        for i in range(n):
+            if len(s) == 0:
+                v.append(-1)
+            elif (len(s) >0 and s[-1][0] > arr[i]): #if top is greater than arr[i] || s[-1][0] shows d element 
+                v.append(s[-1][1]) #pusp its index s[-1][1] -> index of d top element
+            elif (len(s) > 0 and s[-1][0] < arr[i]):
+                while (len(s)>0 and s[-1][0] <= arr[i]):
+                    s.pop()
+                if (len(s)==0):
+                    v.append(-1)
+                else:
+                    v.append(s[-1][1])
+            s.append((arr[i], i)) # here we are pushing two values in stack ie element and its index
+        for i in range(n):
+            v[i] = i - v[i]
+        return v
+            
+if __name__ == "__main__":
+    arr = [100,80,60,70,60,75,85]
+    print(Solution.nearestLargerElement(arr))
+    
+
