@@ -1,0 +1,76 @@
+# Maximum area of a histogram
+
+class Solution:
+    def Max_area(arr):
+        n = len(arr)
+        v_left = []
+        s = []
+        
+        for i in range(n):
+            psuedo_index = -1
+            if len(s) == 0:
+                v_left.append(psuedo_index)
+            elif (len(s)>0 and s[-1][0] <= arr[i]):
+                v_left.append(s[-1][1])
+            elif (len(s) >0 and s[-1][0] > arr[i]):
+                while (len(s)>0 and s[-1][0] > arr[i]):
+                    s.pop()
+                if (len(s) == 0):
+                    v_left.append(psuedo_index)
+                else:
+                    v_left.append(s[-1][1])
+            s.append((arr[i], i))
+        print(v_left)
+    
+   
+        v_right = []
+        st = []
+        for i in range(n-1, -1, -1):
+            psuedo_index = len(arr)
+            if len(st) == 0:
+                v_right.append(psuedo_index)
+            elif (len(st)>0 and st[-1][0] <= arr[i]):
+                v_right.append(st[-1][1])
+            elif (len(st) >0 and st[-1][0] > arr[i]):
+                while (len(st)>0 and st[-1][0] > arr[i]):
+                    st.pop()
+                if (len(st) == 0):
+                    v_right.append(psuedo_index)
+                else:
+                    v_right.append(st[-1][1])
+            st.append((arr[i], i))
+        print(v_right[::-1])
+        
+        width = [i[0] - i[1] - 1 for i in zip(v_right[::-1], v_left)]
+        #print(width)
+        
+        area = [i[0] * i[1] for i in zip(arr, width)]
+        #print(area)
+        print(max(area))
+           
+        """
+        for i in range (len(v_left)+1):
+            width, area = [], []
+            wid = v_left[i] - v_right[i] - 1
+            width.append(wid)
+            area.append(width[i] * arr[i])
+                 
+        left = self.nsl(heights)
+        right = self.nsr(heights)
+        width = []
+        for num1, num2 in zip(left, right):
+            width.append(num2 - num1 - 1)
+        area = []
+        for num1, num2 in zip(heights, width):
+            area.append(num1 * num2)
+        return max(area) 
+        """         
+    
+if __name__ == "__main__":
+    #arr = [6,2,5,4,5,1,6]
+    #arr = [2, 4]
+    #arr = [5,5,1,7,1,1,5,2,7,6]
+    arr = [1, 1]
+    print(Solution.Max_area(arr))
+    
+    
