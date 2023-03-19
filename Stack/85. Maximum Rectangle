@@ -1,0 +1,45 @@
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int: 
+        arr = [0 for i in range(len(matrix[0]))]
+        maxArea = 0
+        #calculating area of each histogram individually
+        # repeatedly call fn again n again for each histogram
+        for i in range(len(matrix)):
+            for j in range(len(matrix[i])):
+                matrix[i][j] = int(matrix[i][j])
+                if matrix[i][j] is 0:
+                    arr[j] = 0
+                elif matrix[i][j] is 1:
+                    arr[j] = arr[j] + 1
+            area = self.MAH(arr)
+            maxArea = max(area, maxArea)    
+        return maxArea
+    
+    def MAH(self, arr):
+        #Nearest smallest to left
+        left = [-1 for i in range(len(arr))]
+        stack1 = []
+        for i in range(len(arr)):
+            while stack1 and arr[stack1[-1]] >= arr[i]:
+                stack1.pop()
+            if stack1:
+                left[i] = stack1[-1]
+            stack1.append(i)
+            
+        #Nearest smallest to right
+        right = [len(arr) for i in range(len(arr))]
+        stack2 = []
+        for i in range(len(arr)-1,-1,-1):
+            while stack2 and arr[stack2[-1]] >= arr[i]:
+                stack2.pop()
+            if stack2:
+                right[i] = stack2[-1]
+            stack2.append(i)
+        
+        # comparing for final maxArea
+        maxArea = 0
+        for i,height in enumerate(arr):
+            width = (right[i] - left[i]) - 1
+            area = width*height
+            maxArea = max(area,maxArea) 
+        return maxArea
