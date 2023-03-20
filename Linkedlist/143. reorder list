@@ -1,0 +1,25 @@
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        #find the second half 
+        slow, fast = head, head.next
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next    
+        second = slow.next
+        
+        # reverse from mid ie second
+        prev = slow.next = None # becz from there we would reverse
+        # the ll and slow will be at the end of ll after reversal.
+        while second:
+            temp = second.next
+            second.next = prev
+            prev = second
+            second = temp
+            
+        #merge two half
+        first, second = head, prev
+        while second:
+            tmp1, tmp2 = first.next, second.next
+            first.next = second
+            second.next = tmp1
+            first, second = tmp1, tmp2
