@@ -1,0 +1,20 @@
+class Solution:
+    def findTheWinner(self, n: int, k: int) -> int:
+        idx = 0
+        k = k - 1 #decrement idx becz every time k will b reduced
+        l = [i for i in range(1, n+1)]
+        
+        def josephus_problem(k, idx):
+            if len(l) == 1: #return the single val left
+                return l[0]
+            idx = (idx + k) % len(l) #find d idx you need to del
+            del l[idx] # del that particular idx
+            return josephus_problem(k, idx) 
+        return josephus_problem(k, idx)
+
+        
+
+
+
+
+
