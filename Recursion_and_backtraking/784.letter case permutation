@@ -1,0 +1,14 @@
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        res = []
+        def solve(output, s):
+            if s == "": 
+                res.append(output)
+            else: #either digit or letter
+                if s[0].isalpha(): #to check for char
+                   solve(output + s[0].upper(), s[1:])
+                   solve(output + s[0].lower(), s[1:])
+                else:#case when it is digit.
+                    solve(output + s[0], s[1:])
+        solve("", s)
+        return res
