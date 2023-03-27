@@ -15,3 +15,101 @@ class Solution:
                 else: #when target is more than taken
                     dp[i][j]=dp[i-1][j-nums[i-1]] or dp[i-1][j]
         return dp[n][target]
+        
+        
+        
+        
+# Equal Sum Partition || top-down 
+
+def canPartition(nums):
+    n = len(nums)
+    summ = sum(nums)
+    half = summ//2
+    dp = [[False for i in range((half)+1)] for j in range(len(nums)+1)]
+    
+    if summ%2 != 0:   return False #create dp for tabulation method 
+    
+    for i in range(n+1):
+        dp[i][0]=True #initialization
+        
+    for i in range(1, n+1):
+        for j in range(1, half+1):
+            if nums[i-1] > j: #when target is less than taken
+                dp[i][j] = dp[i-1][j]          
+            else: #when target is more than taken
+                dp[i][j] = dp[i-1][j - nums[i-1]] or dp[i-1][j]
+    return dp[n][half]
+
+if __name__ == '__main__':
+    nums = [1,5,11,5]
+    print(canPartition(nums))
+    
+    
+    
+    
+    
+# Equal Sum Partition || memoization
+def canPartition(nums, half, n):
+    n = len(nums)
+    summ = sum(nums)
+    half = summ // 2
+    dp = [[False for i in range((half)+1)] for j in range(len(nums)+1)]
+    
+    if summ%2 != 0:   return False #create dp for tabulation method  
+    
+    if n == 0:
+        return True #initialization
+        
+   
+    if nums[n-1] > half: #when target is less than taken
+        dp[n][half] = canPartition(nums, half, n-1)
+        return dp[n][half]
+            
+    elif nums[n-1] <= half: #when target is more than taken
+        dp[n][half] = canPartition(nums, half, n-1) or canPartition(nums, half-nums[n-1], n-1)
+        return dp[n][half]
+
+if __name__ == '__main__':
+    nums = [1,5,11,5]
+    half = summ // 2
+    n = len(nums)
+    print(canPartition(nums, half, n))
+    
+    
+    
+    
+# Equal Sum Partition || recursive || 416. Partition Equal Subset Sum - based on 0/1
+
+#sum odd return false , if even then divide into 2 equal subset and check whether one subset is equal to another 
+
+# S1 - S2 = 0 
+def canPartition(n, nums, summ): 
+    n = len(nums)
+    summ = sum(nums)
+    half = summ//2
+    
+    if summ%2 != 0: #it means that the subset can not be divided into two equal partition so that we can check further
+        return False
+    
+    if n == 0:
+        return True #initialization
+        
+   
+    if nums[n-1] > half: #when target is less than taken
+        return canPartition(nums, half, n-1)
+        
+            
+    elif nums[n-1] <= half: #when target is more than taken
+        not_taken = canPartition(nums, half, n-1) 
+        taken = canPartition(nums, half-nums[n-1], n-1)
+        return taken or not_taken
+    
+if __name__ == '__main__':
+    nums = [1,5,11,5]
+    summ = sum(nums)
+    half = summ // 2
+    n = len(nums)
+    print(canPartition(nums, half, n))
+
+
+
