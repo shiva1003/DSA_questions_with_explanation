@@ -1,0 +1,19 @@
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        result = []
+        temp = []
+        
+        for i in arr2:#for those element which appear in arr2, 
+            count = arr1.count(i)#find there count in arr1 
+
+            while count > 0:
+                result.append(i) #add those element as per its
+                count -= 1 #count in result [2,2,2,1,4,3,3,9,6]
+
+        for i in arr1: # for those ele in arr1 which is not 
+            if i not in arr2: #present in arr2 ie [7, 19]
+                temp.append(i) #append them in temp
+
+        result += sorted(temp) #now add result and temp 
+        
+        return result
