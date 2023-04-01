@@ -1,0 +1,19 @@
+from collections import Counter
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        #using intersection we can find common letters
+        #result = set.intersection(*map(set, words))
+        #return list(result) but this will not take duplicates
+        common = Counter(words[0])
+        #print(l)
+
+        for i in words[1:]: #also start from words[1:]
+            solo_wordcount = Counter(i) #take count of every word in words
+            
+            common &= solo_wordcount # "and" operation to consider duplicate
+        # in order to find common among all
+            
+        res = [] # without this it will just return letters without there
+        for char, count in common.items(): #no. of occurance.
+            res += char*count #multiply by no. of times they occur
+        return res
