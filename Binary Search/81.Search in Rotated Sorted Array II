@@ -1,0 +1,22 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> bool:    
+        left, right = 0, len(nums) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[left] == target or nums[right] == target or nums[mid] == target: 
+                return True #if ans is mid or left most or right most
+            if nums[left] < target < nums[mid]:
+                right = mid- 1 #somewhere between left and mid
+            elif nums[mid] < target < nums[right]:
+                left = mid + 1 #somwehere between right and mid
+            else:
+                return self.search(nums[:mid], target) or self.search(nums[mid + 1:], target)  
+                # self.search(nums[:mid], target) for checking again for less than mid
+                # self.search(nums[mid + 1:], target) for checking again for more than mid
+        return False
+
+        # linear search 
+        #for i in nums:
+        #    if i == target:
+        #        return True
+        #return False
