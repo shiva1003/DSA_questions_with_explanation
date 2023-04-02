@@ -1,0 +1,17 @@
+class Solution:
+    def successfulPairs(self, spells: List[int], potions: List[int], success: int) -> List[int]:
+        result = [0] * len(spells)
+        potions.sort()
+        for i in range(len(spells)):
+            low = 0
+            high = len(potions)-1
+            while low<=high:
+                mid = (low+high)//2
+                #this will give the no. of elements 
+                #which is greater than sucess after mid becz potions is already sorted
+                if potions[mid]*spells[i] >= success:
+                    result[i] = len(potions) - mid
+                    high = mid-1
+                else:
+                    low = mid+1
+        return result
