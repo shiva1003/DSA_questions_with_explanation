@@ -1,0 +1,21 @@
+class Solution:
+    def canThreePartsEqualSum(self, arr: List[int]) -> bool:
+        total_sum = sum(arr)
+        #find the total 
+        
+        if total_sum % 3 != 0: #if it is not divisible by 3
+            return False #then there couldn't b any partition 
+            #in three parts
+        else:
+            curr_sum = 0 #initialize variables
+            partition = 0
+            needed_sum = total_sum//3
+            for i in range(len(arr)):
+                curr_sum += arr[i] #add current values in order 
+                if curr_sum == needed_sum: #to make it in 3 parts
+                    partition += 1 #increase partition number
+                    curr_sum = 0 
+                if partition==3:
+                    return True
+            return False#make current sum as 0 so that you can
+             #add fresh values for new partition
