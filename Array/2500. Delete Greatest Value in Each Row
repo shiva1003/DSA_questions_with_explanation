@@ -1,0 +1,13 @@
+class Solution:
+    def deleteGreatestValue(self, grid: List[List[int]]) -> int:
+        summ = 0 #to add max value in each iteration
+        for i in range(len(grid[0])): 
+            l = []
+            for j in range(len(grid)): #to enter in nested list
+                #append max of each [[]] in l so that we can summ it
+                l.append(max(grid[j])) 
+                #remove max of [[]] to make it suitable for next iteration
+                grid[j].remove(max(grid[j])) 
+            summ += max(l) #add each time max one
+        return summ
+                    
