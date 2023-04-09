@@ -1,0 +1,15 @@
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        l=[] 
+        for i in licensePlate: #for each char in string
+            if i.isalpha(): #if the char is an alphabet
+                l.append(i.lower()) #then append in list whether upper/lower
+
+        words = sorted(words, key = len)#sort as per len becz we want shorter 1
+
+        for w in words: #now check in words
+            if not (Counter(l) - Counter(w)):#if count of char in l is same as that
+            #of count of char in words then return that w becaz it is already
+            #sorted so there is no tension of returning a shorter word from words
+                return w 
+                
