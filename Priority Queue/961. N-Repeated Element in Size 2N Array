@@ -1,0 +1,17 @@
+class Solution:
+    def repeatedNTimes(self, nums: List[int]) -> int:
+        max_heap = [] #max_heap to find max occurance
+        #make set for nums to avoid repitition
+        for i in set(nums):
+            #push count of digit with digit together
+            heapq.heappush(max_heap, [-nums.count(i), i])
+        #heapify your max_heap
+        heapq.heapify(max_heap)
+        print(max_heap)
+        #unpack your heap in order to print that digit 
+        #which has the maximum occurance
+        count, digit = heapq.heappop(max_heap)
+        #return digit not its count
+        return digit
+
+
