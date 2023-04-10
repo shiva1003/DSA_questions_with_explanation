@@ -10,6 +10,6 @@ class Solution:
         for w in words: #now check in words
             if not (Counter(l) - Counter(w)):#if count of char in l is same as that
             #of count of char in words then return that w becaz it is already
-            #sorted so there is no tension of returning a shorter word from words
+            #sorted so there is no tension of returning a shorter word from words,
                 return w 
                 
