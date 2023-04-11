@@ -1,0 +1,14 @@
+class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        new_h = sorted(heights) #make it sorted in order 
+        # to compare it with given input that is heights
+
+        count = 0
+        # zip a pointer s for heights and t for new_h
+        # while iterating on each index if values are 
+        # not equal then they are not properly placed
+        for s, t in zip(heights, new_h):
+            if s != t:
+                count += 1 #increase counter in such case
+        return count
+                        
