@@ -1,0 +1,16 @@
+class Solution:
+    def kthLargestNumber(self, nums: List[str], k: int) -> str:
+        l=[]
+        for i in nums:
+            l.append(int(i)) #convert the string elements of list
+        #print(l) into integer to apply priority queue
+        max_heap = []
+        for i in l:
+            heapq.heappush(max_heap, i) #push elements into heap
+        heapq.heapify(max_heap)
+        # untill the lkength of heap not become equal to k keep
+        # popping it 
+        while len(max_heap) != k:
+            heapq.heappop(max_heap) #return the answer again into  
+        return (str(heapq.heappop(max_heap))) #string
+            
