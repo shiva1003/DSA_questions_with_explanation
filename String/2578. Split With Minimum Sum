@@ -1,0 +1,21 @@
+class Solution:
+    def splitNum(self, num: int) -> int:
+        #approach is to solve using string and maths
+        #converting 4325 as ["4", "3", "2", "5"]
+        digits = [char for char in str(num)]
+
+        #sorted each digit to perform calculation 
+        s = sorted(digits)
+        
+        #initialize two strings to add further values
+        a, b = "", ""
+        #iterate in range of sorted list
+        for i in range(len(s)):
+            #if the index is even then add them together
+            if i % 2 == 0:
+                a += s[i]
+            else:#if odd then add also add them together
+                b += s[i]
+        
+        #result into integer format so that we can add them
+        return int(a) + int(b)
