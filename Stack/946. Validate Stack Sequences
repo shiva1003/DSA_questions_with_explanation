@@ -1,0 +1,15 @@
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        stack = []
+        ptr = 0 #pointer
+        for i in pushed:
+            stack.append(i) #we are pushing the number to the stack
+            
+            while  stack and stack[-1] == popped[ptr]:
+                #if the last element of the stack is equal to the popped element
+                stack.pop()
+                ptr += 1 #we are incrementing pointer
+                
+        return  len(stack) == 0 
+		
+        
